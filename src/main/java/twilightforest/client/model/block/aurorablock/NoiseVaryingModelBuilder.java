@@ -11,24 +11,28 @@ import java.util.Arrays;
 import java.util.List;
 
 public class NoiseVaryingModelBuilder extends CustomLoaderBuilder {
-	private final List<?> variants = new ArrayList<>();
+	private final List<ResourceLocation> variants = new ArrayList<>();
 
 	public NoiseVaryingModelBuilder() {
 		super(TwilightForestMod.prefix("noise_varying"), false);
 	}
 
-	public NoiseVaryingModelBuilder add(T builder) {
-		builder.assertExistence();
-
+	public NoiseVaryingModelBuilder add(ResourceLocation builder) {
 		this.variants.add(builder);
+		return this;
+	}
+
+	public NoiseVaryingModelBuilder addAll(ResourceLocation[] builders) {
+		Arrays.stream(builders).forEach(this::add);
 
 		return this;
 	}
 
-	public NoiseVaryingModelBuilder addAll(T[] builders) {
-		Arrays.stream(builders).forEach(this::add);
-
-		return this;
+	@Override
+	protected NoiseVaryingModelBuilder copyInternal() {
+		NoiseVaryingModelBuilder builder = new NoiseVaryingModelBuilder();
+		builder.variants.addAll(this.variants);
+		return builder;
 	}
 
 	@Override
@@ -36,7 +40,7 @@ public class NoiseVaryingModelBuilder extends CustomLoaderBuilder {
 		JsonObject mainJson = super.toJson(json);
 
 		JsonArray variants = new JsonArray();
-		this.variants.stream().map(ModelFile::getLocation).map(ResourceLocation::toString).forEach(variants::add);
+		this.variants.forEach(resourceLocation -> variants.add(resourceLocation.toString()));
 		mainJson.add("variants", variants);
 
 		return mainJson;

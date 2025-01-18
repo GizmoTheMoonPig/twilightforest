@@ -16,6 +16,8 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
 import twilightforest.TwilightForestMod;
 import twilightforest.data.custom.QuestGenerator;
 import twilightforest.data.custom.stalactites.StalactiteGenerator;
+import twilightforest.data.models.BlockModelGenerator;
+import twilightforest.data.models.ModelGenerator;
 import twilightforest.data.recipes.CraftingGeneratorRunner;
 import twilightforest.data.tags.*;
 
@@ -31,8 +33,7 @@ public class DataGenerators {
 		PackOutput output = event.getGenerator().getPackOutput();
 
 		//client generators
-		//generator.addProvider(true, new BlockstateGenerator(output));
-		//generator.addProvider(true, new ItemModelGenerator(output));
+		generator.addProvider(true, new ModelGenerator(output));
 		generator.addProvider(true, new ParticleGenerator(output));
 		generator.addProvider(true, new SoundGenerator(output));
 

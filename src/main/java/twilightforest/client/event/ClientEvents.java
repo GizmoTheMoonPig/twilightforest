@@ -17,6 +17,7 @@ import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.entity.state.PlayerRenderState;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.item.ItemStackRenderState;
 import net.minecraft.client.sounds.MusicInfo;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -28,7 +29,9 @@ import net.minecraft.server.packs.resources.ReloadableResourceManager;
 import net.minecraft.sounds.Music;
 import net.minecraft.sounds.Musics;
 import net.minecraft.util.Mth;
+import net.minecraft.util.context.ContextKey;
 import net.minecraft.util.random.SimpleWeightedRandomList;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -53,7 +56,6 @@ import twilightforest.block.GiantBlock;
 import twilightforest.block.MiniatureStructureBlock;
 import twilightforest.block.entity.GrowingBeanstalkBlockEntity;
 import twilightforest.client.BugModelAnimationHelper;
-import twilightforest.client.ISTER;
 import twilightforest.client.OptifineWarningScreen;
 import twilightforest.client.TFShaders;
 import twilightforest.config.TFConfig;
@@ -76,6 +78,7 @@ public class ClientEvents {
 	private static final VoxelShape GIANT_BLOCK = Shapes.box(0.0D, 0.0D, 0.0D, 4.0D, 4.0D, 4.0D);
 	private static final MutableComponent WIP_TEXT = Component.translatable("misc.twilightforest.wip").withStyle(ChatFormatting.RED);
 	private static final MutableComponent EMPERORS_CLOTH_TOOLTIP = Component.translatable("item.twilightforest.emperors_cloth.desc").withStyle(ChatFormatting.GRAY);
+	public static ContextKey<Boolean> HEAD_KEY = new ContextKey<>(TwilightForestMod.prefix("wearing_trophy"));
 
 	private static boolean firstTitleScreenShown = false;
 
@@ -319,8 +322,7 @@ public class ClientEvents {
 	}
 
 	private static void unrenderHeadWithTrophies(RenderLivingEvent.Pre<?, ?, ?> event) {
-		ItemStack stack = event.getRenderState().headItem;
-		boolean visible = !(stack.getItem() instanceof TrophyItem) && !areCuriosEquipped(event.getRenderState());
+		boolean visible = event.getRenderState().getRenderDataOrDefault(HEAD_KEY, false);
 		boolean isPlayer = event.getRenderState() instanceof PlayerRenderState;
 		if (event.getRenderer().getModel() instanceof HeadedModel headedModel) {
 			headedModel.getHead().visible = visible && (!isPlayer || headedModel.getHead().visible);  // some mods like Better Combat can move player's head and hide it in the first person view
@@ -330,7 +332,7 @@ public class ClientEvents {
 		}
 	}
 
-	private static boolean areCuriosEquipped(EntityRenderState entity) {
+	public static boolean areCuriosEquipped(LivingEntity entity) {
 //		if (ModList.get().isLoaded("curios")) {
 //			return CuriosCompat.isCurioEquippedAndVisible(entity, stack -> stack.getItem() instanceof TrophyItem);
 //		}

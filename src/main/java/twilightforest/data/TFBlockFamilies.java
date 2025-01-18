@@ -1,5 +1,7 @@
 package twilightforest.data;
 
+import com.google.common.collect.Maps;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
@@ -9,117 +11,122 @@ import twilightforest.init.TFBlocks;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
 
 // For Datagen only! Avoid referencing this class too early, or the DeferredHolders will return null!
 public class TFBlockFamilies {
-	public static final BlockFamily TWILIGHT_OAK = familyBuilder(TFBlocks.TWILIGHT_OAK_PLANKS.value())
-		.stairs(TFBlocks.TWILIGHT_OAK_STAIRS.value())
-		.slab(TFBlocks.TWILIGHT_OAK_SLAB.value())
-		.button(TFBlocks.TWILIGHT_OAK_BUTTON.value())
-		.fence(TFBlocks.TWILIGHT_OAK_FENCE.value())
-		.fenceGate(TFBlocks.TWILIGHT_OAK_GATE.value())
-		.pressurePlate(TFBlocks.TWILIGHT_OAK_PLATE.value())
-		.door(TFBlocks.TWILIGHT_OAK_DOOR.value())
-		.trapdoor(TFBlocks.TWILIGHT_OAK_TRAPDOOR.value())
-		.sign(TFBlocks.TWILIGHT_OAK_SIGN.value(), TFBlocks.TWILIGHT_WALL_SIGN.value())
+
+	private static final Map<Block, BlockFamily> MAP = Maps.newHashMap();
+
+	public static final BlockFamily TWILIGHT_OAK = familyBuilder(TFBlocks.TWILIGHT_OAK_PLANKS.get())
+		.stairs(TFBlocks.TWILIGHT_OAK_STAIRS.get())
+		.slab(TFBlocks.TWILIGHT_OAK_SLAB.get())
+		.button(TFBlocks.TWILIGHT_OAK_BUTTON.get())
+		.fence(TFBlocks.TWILIGHT_OAK_FENCE.get())
+		.fenceGate(TFBlocks.TWILIGHT_OAK_GATE.get())
+		.pressurePlate(TFBlocks.TWILIGHT_OAK_PLATE.get())
+		.door(TFBlocks.TWILIGHT_OAK_DOOR.get())
+		.trapdoor(TFBlocks.TWILIGHT_OAK_TRAPDOOR.get())
+		.sign(TFBlocks.TWILIGHT_OAK_SIGN.get(), TFBlocks.TWILIGHT_WALL_SIGN.get())
 		.recipeGroupPrefix("wooden")
 		.recipeUnlockedBy("has_planks")
 		.getFamily();
 
-	public static final BlockFamily CANOPY = familyBuilder(TFBlocks.CANOPY_PLANKS.value())
-		.stairs(TFBlocks.CANOPY_STAIRS.value())
-		.slab(TFBlocks.CANOPY_SLAB.value())
-		.button(TFBlocks.CANOPY_BUTTON.value())
-		.fence(TFBlocks.CANOPY_FENCE.value())
-		.fenceGate(TFBlocks.CANOPY_GATE.value())
-		.pressurePlate(TFBlocks.CANOPY_PLATE.value())
-		.door(TFBlocks.CANOPY_DOOR.value())
-		.trapdoor(TFBlocks.CANOPY_TRAPDOOR.value())
-		.sign(TFBlocks.CANOPY_SIGN.value(), TFBlocks.CANOPY_WALL_SIGN.value())
+	public static final BlockFamily CANOPY = familyBuilder(TFBlocks.CANOPY_PLANKS.get())
+		.stairs(TFBlocks.CANOPY_STAIRS.get())
+		.slab(TFBlocks.CANOPY_SLAB.get())
+		.button(TFBlocks.CANOPY_BUTTON.get())
+		.fence(TFBlocks.CANOPY_FENCE.get())
+		.fenceGate(TFBlocks.CANOPY_GATE.get())
+		.pressurePlate(TFBlocks.CANOPY_PLATE.get())
+		.door(TFBlocks.CANOPY_DOOR.get())
+		.trapdoor(TFBlocks.CANOPY_TRAPDOOR.get())
+		.sign(TFBlocks.CANOPY_SIGN.get(), TFBlocks.CANOPY_WALL_SIGN.get())
 		.recipeGroupPrefix("wooden")
 		.recipeUnlockedBy("has_planks")
 		.getFamily();
 
-	public static final BlockFamily MANGROVE = familyBuilder(TFBlocks.MANGROVE_PLANKS.value())
-		.stairs(TFBlocks.MANGROVE_STAIRS.value())
-		.slab(TFBlocks.MANGROVE_SLAB.value())
-		.button(TFBlocks.MANGROVE_BUTTON.value())
-		.fence(TFBlocks.MANGROVE_FENCE.value())
-		.fenceGate(TFBlocks.MANGROVE_GATE.value())
-		.pressurePlate(TFBlocks.MANGROVE_PLATE.value())
-		.door(TFBlocks.MANGROVE_DOOR.value())
-		.trapdoor(TFBlocks.MANGROVE_TRAPDOOR.value())
-		.sign(TFBlocks.MANGROVE_SIGN.value(), TFBlocks.MANGROVE_WALL_SIGN.value())
+	public static final BlockFamily MANGROVE = familyBuilder(TFBlocks.MANGROVE_PLANKS.get())
+		.stairs(TFBlocks.MANGROVE_STAIRS.get())
+		.slab(TFBlocks.MANGROVE_SLAB.get())
+		.button(TFBlocks.MANGROVE_BUTTON.get())
+		.fence(TFBlocks.MANGROVE_FENCE.get())
+		.fenceGate(TFBlocks.MANGROVE_GATE.get())
+		.pressurePlate(TFBlocks.MANGROVE_PLATE.get())
+		.door(TFBlocks.MANGROVE_DOOR.get())
+		.trapdoor(TFBlocks.MANGROVE_TRAPDOOR.get())
+		.sign(TFBlocks.MANGROVE_SIGN.get(), TFBlocks.MANGROVE_WALL_SIGN.get())
 		.recipeGroupPrefix("wooden")
 		.recipeUnlockedBy("has_planks")
 		.getFamily();
 
-	public static final BlockFamily DARKWOOD = familyBuilder(TFBlocks.DARK_PLANKS.value())
-		.stairs(TFBlocks.DARK_STAIRS.value())
-		.slab(TFBlocks.DARK_SLAB.value())
-		.button(TFBlocks.DARK_BUTTON.value())
-		.fence(TFBlocks.DARK_FENCE.value())
-		.fenceGate(TFBlocks.DARK_GATE.value())
-		.pressurePlate(TFBlocks.DARK_PLATE.value())
-		.door(TFBlocks.DARK_DOOR.value())
-		.trapdoor(TFBlocks.DARK_TRAPDOOR.value())
-		.sign(TFBlocks.DARK_SIGN.value(), TFBlocks.DARK_WALL_SIGN.value())
+	public static final BlockFamily DARKWOOD = familyBuilder(TFBlocks.DARK_PLANKS.get())
+		.stairs(TFBlocks.DARK_STAIRS.get())
+		.slab(TFBlocks.DARK_SLAB.get())
+		.button(TFBlocks.DARK_BUTTON.get())
+		.fence(TFBlocks.DARK_FENCE.get())
+		.fenceGate(TFBlocks.DARK_GATE.get())
+		.pressurePlate(TFBlocks.DARK_PLATE.get())
+		.door(TFBlocks.DARK_DOOR.get())
+		.trapdoor(TFBlocks.DARK_TRAPDOOR.get())
+		.sign(TFBlocks.DARK_SIGN.get(), TFBlocks.DARK_WALL_SIGN.get())
 		.recipeGroupPrefix("wooden")
 		.recipeUnlockedBy("has_planks")
 		.getFamily();
 
-	public static final BlockFamily TIMEWOOD = familyBuilder(TFBlocks.TIME_PLANKS.value())
-		.stairs(TFBlocks.TIME_STAIRS.value())
-		.slab(TFBlocks.TIME_SLAB.value())
-		.button(TFBlocks.TIME_BUTTON.value())
-		.fence(TFBlocks.TIME_FENCE.value())
-		.fenceGate(TFBlocks.TIME_GATE.value())
-		.pressurePlate(TFBlocks.TIME_PLATE.value())
-		.door(TFBlocks.TIME_DOOR.value())
-		.trapdoor(TFBlocks.TIME_TRAPDOOR.value())
-		.sign(TFBlocks.TIME_SIGN.value(), TFBlocks.TIME_WALL_SIGN.value())
+	public static final BlockFamily TIMEWOOD = familyBuilder(TFBlocks.TIME_PLANKS.get())
+		.stairs(TFBlocks.TIME_STAIRS.get())
+		.slab(TFBlocks.TIME_SLAB.get())
+		.button(TFBlocks.TIME_BUTTON.get())
+		.fence(TFBlocks.TIME_FENCE.get())
+		.fenceGate(TFBlocks.TIME_GATE.get())
+		.pressurePlate(TFBlocks.TIME_PLATE.get())
+		.door(TFBlocks.TIME_DOOR.get())
+		.trapdoor(TFBlocks.TIME_TRAPDOOR.get())
+		.sign(TFBlocks.TIME_SIGN.get(), TFBlocks.TIME_WALL_SIGN.get())
 		.recipeGroupPrefix("wooden")
 		.recipeUnlockedBy("has_planks")
 		.getFamily();
 
-	public static final BlockFamily TRANSWOOD = familyBuilder(TFBlocks.TRANSFORMATION_PLANKS.value())
-		.stairs(TFBlocks.TRANSFORMATION_STAIRS.value())
-		.slab(TFBlocks.TRANSFORMATION_SLAB.value())
-		.button(TFBlocks.TRANSFORMATION_BUTTON.value())
-		.fence(TFBlocks.TRANSFORMATION_FENCE.value())
-		.fenceGate(TFBlocks.TRANSFORMATION_GATE.value())
-		.pressurePlate(TFBlocks.TRANSFORMATION_PLATE.value())
-		.door(TFBlocks.TRANSFORMATION_DOOR.value())
-		.trapdoor(TFBlocks.TRANSFORMATION_TRAPDOOR.value())
-		.sign(TFBlocks.TRANSFORMATION_SIGN.value(), TFBlocks.TRANSFORMATION_WALL_SIGN.value())
+	public static final BlockFamily TRANSWOOD = familyBuilder(TFBlocks.TRANSFORMATION_PLANKS.get())
+		.stairs(TFBlocks.TRANSFORMATION_STAIRS.get())
+		.slab(TFBlocks.TRANSFORMATION_SLAB.get())
+		.button(TFBlocks.TRANSFORMATION_BUTTON.get())
+		.fence(TFBlocks.TRANSFORMATION_FENCE.get())
+		.fenceGate(TFBlocks.TRANSFORMATION_GATE.get())
+		.pressurePlate(TFBlocks.TRANSFORMATION_PLATE.get())
+		.door(TFBlocks.TRANSFORMATION_DOOR.get())
+		.trapdoor(TFBlocks.TRANSFORMATION_TRAPDOOR.get())
+		.sign(TFBlocks.TRANSFORMATION_SIGN.get(), TFBlocks.TRANSFORMATION_WALL_SIGN.get())
 		.recipeGroupPrefix("wooden")
 		.recipeUnlockedBy("has_planks")
 		.getFamily();
 
-	public static final BlockFamily MINEWOOD = familyBuilder(TFBlocks.MINING_PLANKS.value())
-		.stairs(TFBlocks.MINING_STAIRS.value())
-		.slab(TFBlocks.MINING_SLAB.value())
-		.button(TFBlocks.MINING_BUTTON.value())
-		.fence(TFBlocks.MINING_FENCE.value())
-		.fenceGate(TFBlocks.MINING_GATE.value())
-		.pressurePlate(TFBlocks.MINING_PLATE.value())
-		.door(TFBlocks.MINING_DOOR.value())
-		.trapdoor(TFBlocks.MINING_TRAPDOOR.value())
-		.sign(TFBlocks.MINING_SIGN.value(), TFBlocks.MINING_WALL_SIGN.value())
+	public static final BlockFamily MINEWOOD = familyBuilder(TFBlocks.MINING_PLANKS.get())
+		.stairs(TFBlocks.MINING_STAIRS.get())
+		.slab(TFBlocks.MINING_SLAB.get())
+		.button(TFBlocks.MINING_BUTTON.get())
+		.fence(TFBlocks.MINING_FENCE.get())
+		.fenceGate(TFBlocks.MINING_GATE.get())
+		.pressurePlate(TFBlocks.MINING_PLATE.get())
+		.door(TFBlocks.MINING_DOOR.get())
+		.trapdoor(TFBlocks.MINING_TRAPDOOR.get())
+		.sign(TFBlocks.MINING_SIGN.get(), TFBlocks.MINING_WALL_SIGN.get())
 		.recipeGroupPrefix("wooden")
 		.recipeUnlockedBy("has_planks")
 		.getFamily();
 
-	public static final BlockFamily SORTWOOD = familyBuilder(TFBlocks.SORTING_PLANKS.value())
-		.stairs(TFBlocks.SORTING_STAIRS.value())
-		.slab(TFBlocks.SORTING_SLAB.value())
-		.button(TFBlocks.SORTING_BUTTON.value())
-		.fence(TFBlocks.SORTING_FENCE.value())
-		.fenceGate(TFBlocks.SORTING_GATE.value())
-		.pressurePlate(TFBlocks.SORTING_PLATE.value())
-		.door(TFBlocks.SORTING_DOOR.value())
-		.trapdoor(TFBlocks.SORTING_TRAPDOOR.value())
-		.sign(TFBlocks.SORTING_SIGN.value(), TFBlocks.SORTING_WALL_SIGN.value())
+	public static final BlockFamily SORTWOOD = familyBuilder(TFBlocks.SORTING_PLANKS.get())
+		.stairs(TFBlocks.SORTING_STAIRS.get())
+		.slab(TFBlocks.SORTING_SLAB.get())
+		.button(TFBlocks.SORTING_BUTTON.get())
+		.fence(TFBlocks.SORTING_FENCE.get())
+		.fenceGate(TFBlocks.SORTING_GATE.get())
+		.pressurePlate(TFBlocks.SORTING_PLATE.get())
+		.door(TFBlocks.SORTING_DOOR.get())
+		.trapdoor(TFBlocks.SORTING_TRAPDOOR.get())
+		.sign(TFBlocks.SORTING_SIGN.get(), TFBlocks.SORTING_WALL_SIGN.get())
 		.recipeGroupPrefix("wooden")
 		.recipeUnlockedBy("has_planks")
 		.getFamily();
@@ -137,8 +144,17 @@ public class TFBlockFamilies {
 		return available;
 	}
 
-	@NotNull
 	private static BlockFamily.Builder familyBuilder(Block baseBlock) {
-		return new BlockFamily.Builder(baseBlock);
+		BlockFamily.Builder builder = new BlockFamily.Builder(baseBlock);
+		BlockFamily blockfamily = MAP.put(baseBlock, builder.getFamily());
+		if (blockfamily != null) {
+			throw new IllegalStateException("Duplicate family definition for " + BuiltInRegistries.BLOCK.getKey(baseBlock));
+		} else {
+			return builder;
+		}
+	}
+
+	public static Stream<BlockFamily> getAllFamilies() {
+		return MAP.values().stream();
 	}
 }

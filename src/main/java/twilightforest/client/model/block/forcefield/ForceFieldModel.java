@@ -26,10 +26,18 @@ public class ForceFieldModel implements IDynamicBakedModel {
 
 	private final Map<BlockElement, ForceFieldModelLoader.Condition> parts;
 	private final Function<String, TextureAtlasSprite> spriteFunction;
+	private final TextureAtlasSprite particle;
+	private final boolean usesAO;
+	private final boolean usesBlockLight;
+	private final ItemTransforms transforms;
 
 	public ForceFieldModel(Map<BlockElement, ForceFieldModelLoader.Condition> parts, Function<String, TextureAtlasSprite> spriteFunction, boolean useAmbientOcclusion, boolean usesBlockLight, ItemTransforms itemTransforms) {
 		this.parts = parts;
 		this.spriteFunction = spriteFunction;
+		this.particle = spriteFunction.apply("particle");
+		this.usesAO = useAmbientOcclusion;
+		this.usesBlockLight = usesBlockLight;
+		this.transforms = itemTransforms;
 	}
 
 	@Override
@@ -145,7 +153,7 @@ public class ForceFieldModel implements IDynamicBakedModel {
 
 	@Override
 	public boolean useAmbientOcclusion() {
-		return true;
+		return this.usesAO;
 	}
 
 	@Override
@@ -155,7 +163,7 @@ public class ForceFieldModel implements IDynamicBakedModel {
 
 	@Override
 	public boolean usesBlockLight() {
-		return true;
+		return this.usesBlockLight;
 	}
 
 	@Override
