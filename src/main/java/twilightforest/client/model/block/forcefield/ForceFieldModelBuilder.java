@@ -37,7 +37,7 @@ public class ForceFieldModelBuilder extends CustomLoaderBuilder {
 		return this;
 	}
 
-	protected ForceFieldModelBuilder() {
+	public ForceFieldModelBuilder() {
 		super(TwilightForestMod.prefix("force_field"), false);
 	}
 

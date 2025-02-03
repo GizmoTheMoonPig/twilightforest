@@ -25,7 +25,7 @@ public class ConnectedTextureBuilder extends CustomLoaderBuilder {
 	private int tintIndex = -1;
 	private int emissivity = 0;
 
-	protected ConnectedTextureBuilder() {
+	public ConnectedTextureBuilder() {
 		super(TwilightForestMod.prefix("connected_texture_block"), false);
 	}
 
